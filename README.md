@@ -4,7 +4,7 @@
 As a keen noughts and crosses (/tix-tac-toe) player (and aspiring champion), I need a web service that allows me to play noughts and crosses against a computer via a REST API. The API must allow me to create a new game, make the next move in a game, and list all games previously played.
 
 ### Noughts and Crosses (Tic-tac-toe)
-Tic-tac-toe (American English), noughts and crosses (Commonwealth English and British English) is a game for two players, X and O, who take turns marking the spaces in a 3×3 grid. The player who succeeds in placing three of their marks in a diagonal, horizontal, or vertical row is the winner. ~It is a solved game with a forced draw assuming best play from both players.~
+Tic-tac-toe (American English), noughts and crosses (British English) is a game for two players, X and O, who take turns marking the spaces in a 3×3 grid. The player who succeeds in placing three of their marks in a diagonal, horizontal, or vertical row is the winner. ~It is a solved game with a forced draw assuming best play from both players.~
 
 An example game series can be represented as:
 ```
