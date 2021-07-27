@@ -42,7 +42,7 @@ An example game series can be represented as:
 ## Your Task
 Use Python (any flavour) to Develop a REST API that:
 - Allows me to create a new game of Noughts and Crosses, and returns the game ID.
-- Allows me to make the next move by specifying the co-ordinates I wish to move on e.g. `{"x": 1, "y": 1}` would denote a move to the middle square by the requesting player, and returns the new state of the board _after_ the computer has made its move in turn.
+- Allows me to make the next move by specifying the co-ordinates I wish to move on. e.g. `{"x": 1, "y": 1}` would denote a move to the middle square by the requesting player, and returns the new state of the board _after_ the computer has made its move in turn.
 - Allows me to view all moves in a game, choronologically ordered.
 - Allows me to view all games I have played, chronologically ordered.
 
@@ -52,6 +52,7 @@ Use Python (any flavour) to Develop a REST API that:
 - Deploy the service.
 - Expand the game-grid to size N*N, allowing for longer and more fulfulling games.
 - Surprise us! Use your inherent style and panache to sprinkle that extra bit of gee-whizz atop your solution.
+
 
 ## Notes
 - Please work independently without code review by others. State any assumptions you made or questions you had along the way. When complete, note how much time you spent from beginning to end.
@@ -69,4 +70,4 @@ Use Python (any flavour) to Develop a REST API that:
   - Any stretch goals you attempted,
   - Anything else you want us to know about,
   - Any feedback you have on this technical challenge -- we care deeply about our hiring process here at Ethyca, and about the engineers who go through it (that's you!) -- we wholeheartedly promise any feedback will be met with a warm thankyou,
-- The assignment can be published and shared with us via any code sharing platform such as Github, Gitlab, or sent as a .zip file.
+- The assignment can be published and shared with us via any code sharing platform such as Github, Gitlab, or sent as a .zip file to the Ethyca employee who sent you this task.
