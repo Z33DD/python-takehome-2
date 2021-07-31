@@ -1,4 +1,4 @@
-# Ethyca Code Test -- Open Source Engineer (Python)
+# Ethyca Technical Challenge -- Open Source Engineer (Python)
 
 ## User Story
 As a keen noughts and crosses (/tic-tac-toe) player (and aspiring champion), I need a web service that allows me to play against a computer via a REST API. The API must allow me to create a new game, make the next move in a game, and list all games previously played.
