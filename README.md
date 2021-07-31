@@ -53,6 +53,7 @@ Use Python (any flavour) to develop a REST API that:
 - It's our intention that you spend between 3 and 4 hours on this task.
 - This challenge is deliberately vague on detail to give candidates the opportunity for a wide range of solutions. That being said, feel free to reach out and ask questions as needed.
 - There is no 100% correct solution, be creative! We are just as interested in your approach to problem solving as we are in your actual solution.
+- Remember that we'll schedule a debrief interview with you afterwards to discuss the code and ask questions, so you'll be able to explain what you've done!
 - Code style, comments, and general code hygiene matter despite this being a test!
 
 
@@ -66,3 +67,4 @@ Use Python (any flavour) to develop a REST API that:
   - Anything else you want us to know about,
   - Any feedback you have on this technical challenge -- we care deeply about our hiring process here at Ethyca, and about the engineers who go through it (that's you!) -- we wholeheartedly promise any feedback will be met with a warm thank you!
 - The assignment can be published and shared with us via any code sharing platform such as Github, Gitlab, or sent as a .zip file to the Ethyca employee who sent you this task.
+- We'll review your submission in advance of your debrief interview, and look forward to talking to you about it!
