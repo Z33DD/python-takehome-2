@@ -29,7 +29,9 @@ app serve
 ## Total time spent on this project
 
 4 hours and 23 minutes (non-continuous).
-I used a lot of recycled code from other projects I built in the past to spped up the development and infrastructure.
+I used a lot of recycled code from this projects I built in the past to speed up the development and infrastructure:
+- [gilgates-api](https://github.com/Z33DD/gilgates-api)
+- [wealthcraft-api](https://github.com/Z33DD/wealthcraft-api)
 
 ## Assumptions:
 - There are always only two players
