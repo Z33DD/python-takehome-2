@@ -1,0 +1,74 @@
+from datetime import datetime
+from typing import Any, Generator
+
+import jwt
+import sqlalchemy
+from sqlmodel import Session
+from pydantic import ValidationError
+from fastapi.security import OAuth2PasswordBearer
+from fastapi import Depends, HTTPException, status
+
+from app.dao import DAO
+from app import logger
+from app.models import User
+from app.services import auth
+from app.config import settings
+
+
+reuseable_oauth = OAuth2PasswordBearer(
+    tokenUrl="/auth/login",
+    scheme_name="JWT",
+)
+
+
+def get_dao() -> Generator[DAO, Any, None]:
+    config = settings.get()
+    engine = config.build_engine()
+
+    with Session(engine) as session:
+        yield DAO(session)
+        try:
+            session.commit()
+        except sqlalchemy.exc.StatementError as ex:
+            logger.exception(ex)
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
+
+async def get_current_user(
+    token: str = Depends(reuseable_oauth),
+    dao: DAO = Depends(get_dao),
+) -> User:
+    try:
+        payload = auth.verify_token(token)
+        if not payload:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="User not found!",
+                headers={"WWW-Authenticate": "Bearer"},
+            )
+
+        if datetime.fromtimestamp(payload["exp"]) < datetime.now():
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Token expired",
+                headers={"WWW-Authenticate": "Bearer"},
+            )
+    except (jwt.PyJWTError, ValidationError):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Could not validate credentials",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    user = dao.user.query_one(User.email, payload["email"])
+
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="User not found!",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    return user

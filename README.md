@@ -1,70 +1,53 @@
-# Ethyca Technical Challenge -- Open Source Engineer (Python)
+# Ethyca Technical Challenge
 
-## User Story
-As a keen noughts and crosses (/tic-tac-toe) player (and aspiring champion), I need a web service that allows me to play against a computer via a REST API. The API must allow me to create a new game, make the next move in a game, and list all games previously played.
+## How to run:
 
-### Noughts and Crosses (Tic-tac-toe)
-Tic-tac-toe (American English), noughts and crosses (British English) is a game for two players, X and O, who take turns marking the spaces in a 3×3 grid. The player who succeeds in placing three of their marks in a diagonal, horizontal, or vertical row is the winner. ~It is a solved game with a forced draw assuming best play from both players.~
+You can run this project both by using the docker-compose file or by running everything locally with uvicorn, celery (the redis instance needs docker) and supabase cli.
 
-An example game series can be represented as:
-```
-# A blank board
-[
-    [".", ".", "."],
-    [".", ".", "."],
-    [".", ".", "."],
-]
 
-# First move
-[
-    [".", ".", "."],
-    [".", "X", "."],
-    [".", ".", "."],
-]
-
-# Second move
-[
-    [".", ".", "."],
-    [".", "X", "."],
-    [".", ".", "O"],
-]
-
-# Third move
-[
-    [".", ".", "X"],
-    [".", "X", "."],
-    ["O", ".", "O"],
-]
-
-...and so forth
+Install the application:
+```bash
+poetry install
+poetry shell
 ```
 
-## Your Task
-Use Python (any flavour) to develop a REST API that:
-- Allows me to create a new game of Noughts and Crosses, and returns the game ID.
-- Allows me to make the next move by specifying the co-ordinates I wish to move on. e.g. `{"x": 1, "y": 1}` would denote a move to the middle square by the requesting player, and returns the new state of the board _after_ the computer has made its move in turn. __Note: There is no need to create an AI opponent, random moves are fine__
-- Allows me to view all moves in a game, chronologically ordered.
-- Allows me to view all games I have played, chronologically ordered.
-- Surprise us! Use your inherent style and panache to sprinkle that extra bit of gee-whizz atop your solution.
+Run the task queue for celery:
+```bash
+docker compose up -d redis
+```
 
+Run the worker:
+```bash
+poetry run celery -A app.worker worker
+```
 
-## Notes
-- Please work independently without code review by others.
-- It's our intention that you spend between 3 and 4 hours on this task.
-- This challenge is deliberately vague on detail to give candidates the opportunity for a wide range of solutions. That being said, feel free to reach out and ask questions as needed.
-- There is no 100% correct solution, be creative! We are just as interested in your approach to problem solving as we are in your actual solution.
-- Remember that we'll schedule a debrief interview with you afterwards to discuss the code and ask questions, so you'll be able to explain what you've done!
-- Code style, comments, and general code hygiene matter despite this being a test!
+Run the server:
+```bash
+app serve
+```
 
+## Total time spent on this project
 
-## Delivery
-- Once completed, please create a README file describing:
-  - How to run your project (or where it is hosted),
-  - How much time you spent building the project,
-  - Any assumptions you made,
-  - Any trade-offs you made,
-  - Any special/unique features you added,
-  - Anything else you want us to know about,
-  - Any feedback you have on this technical challenge -- we care deeply about our hiring process here at Ethyca, and about the engineers who go through it (that's you!) -- we wholeheartedly promise any feedback will be met with a warm thank you!
-- The assignment can be published and shared with us via any code sharing platform such as Github, Gitlab, or sent as a .zip file to the Ethyca employee who sent you this task.
-- We'll review your submission in advance of your debrief interview, and look forward to talking to you about it!
+4 hours and 23 minutes (non-continuous).
+I used a lot of recycled code from other projects I built in the past to spped up the development and infrastructure.
+
+## Assumptions:
+- There are always only two players
+- Player 1 always get X and player 2 alwayes get O
+- As I'm using Supabase, the frontend can have realtime access to changes made in the database.
+- No game will be abandoned
+- Performance matters
+  
+## Tradeoffs
+I build a very specific way to interact with the database with the DAO I created, so it will need to be heavly updated as the codebase evolves. Also, the way this in heavly typed can be hard for developer that don't understand Python typing hunts.
+
+## Unique features:
+- Realtime changes with Supabase
+- Asynchronous requests using an ASGI server
+- Background task using celery
+- Good test coverage
+- SQLite db for testing and PostgreSQL for production
+- Scalability between poducers and cosumers of the task queue
+  
+## My feedback
+I would like to have more time to improve the application because I think it is a bit messy as I used code from different projects to build this one.
